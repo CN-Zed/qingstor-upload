@@ -35,6 +35,8 @@ def upload_file(path):
         print >> sys.stderr, "[%s] can not be open!!!" % path
     else:
         key_name = path.replace(base_path, "").replace("\\", "/")
+        if key_name[0] == "/":
+            key_name = key_name[1:]
         key = bucket.new_key(key_name)
         if key.send_file(my_file, get_type(key_name)):
             print("[%s]上传成功。" % key_name)
